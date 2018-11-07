@@ -1,0 +1,288 @@
+
+header{
+    background-color: #3879CC;
+    height: 67px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    padding-left: 60px
+}
+
+.social{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 70%;
+}
+
+
+body {
+    margin: 0;   
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-color: #f1f1f1;
+    border-width: 1px;
+    border-right-style: solid;
+    border-bottom-style: outset;
+    border-left-style: solid;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 0;
+    margin: 0 65px;
+
+}
+nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+nav ul li{
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
+    
+}
+
+nav ul li a{
+    text-decoration : none;
+    color: gray;
+}
+
+.menu2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 45%;
+    text-decoration : none;
+}
+
+.nav-home{
+    color:black;
+    background: #f1f1f1;
+    margin: 0;
+    padding: 15px 10px 15px 10px;
+
+}
+
+li ul {
+    position: absolute;
+    z-index: 100000000;
+    left: 177px;
+    top: 112px;
+    display: none;
+    list-style: none;
+    border-color: #dddddd;
+    border-width: 1px;
+    border-style: solid;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 0px 10px;
+    height: 300px;
+    background-color: white;
+    
+    
+    
+}
+
+.dropdown:hover{
+    background: #dddddd;
+    margin: 0;
+    padding: 15px 10px 15px 10px;
+}
+
+li:hover ul { 
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.divider{
+    height: 1px;
+    margin: 5px 0;
+    background-color: #e5e5e5;
+
+}
+
+.dropdownColor{
+    color: black;
+}
+
+.imagens{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 85.5%;
+    margin: 50px 0px 0 65px;
+    padding: 0;
+}
+
+.img{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 65%; 
+}
+
+.ad{
+    width: 30%;
+    margin: 0;
+}
+
+.text{
+    width: 55.5%;
+}
+h1{
+    margin: 20px 0 20px 65px;
+    padding: 0 0 0 10px;
+    font-size: 28px;
+    line-height: 30px;
+    font-family: Roboto,sans-serif;
+    font-weight: 700;
+    letter-spacing: -1px;
+    border-left: 4px solid #d6d6d6;
+    width: 30%;
+}
+
+small{
+    display: block;
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #969696;
+    padding: 0;
+}
+
+small strong {
+    font-weight: 500;
+    color: #000;
+}
+
+p{
+    color: #4e4e4e;
+    max-width: 100%;
+    margin-left: 65px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+
+strong a{
+    text-decoration: none;
+    color: #337ab7;
+}
+
+.divider2{
+    height: 1px;
+    margin-left: 65px;
+    width: 55.5%;
+    background-color: #e5e5e5;
+
+}
+
+h2{
+    font-weight: 700;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-left: 65px;
+    width: 200px;
+    font-size: 14px;
+    color: #4e4e4e;
+}
+
+.texto {
+    color: #4e4e4e;
+    width: 55.5%;
+    margin-left: 65px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+}
+
+.botoes{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    width: 55.5%;
+    margin-left: 65px;
+}
+
+btn{
+    width: 85px;
+    height: 25px;;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+btn a{
+    color: #969696;
+    text-decoration: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.container {
+
+    width: 30%;
+    margin: 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.42857143;
+}
+
+.conteudo{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.listTitulo{
+    font-size: 20px;
+    width: 50%;
+}
+.list {
+    width: 100%;
+}
+
+.list li {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    background-color: #e4f6d4;
+    border-bottom: #cedec0 solid 1px;
+}
+
+.list li:last-child {
+    border-bottom: unset;
+
+
+.list li span {
+    margin: 5px;
+    color: green
+}
+
+@media only screen and (max-width: 768px) {
+     header{
+        background-color: #ffffff;
+     }
+
+     .imagens{
+         display: none;
+     }
+
+     body{
+         width: 100%;
+     }
+}
