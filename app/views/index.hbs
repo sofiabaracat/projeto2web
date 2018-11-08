@@ -5,7 +5,7 @@
 
     <title>mangastream</title>
 
-    <link href="./style.css" rel="stylesheet">
+    <link href="style/style.css" rel="stylesheet">
   </head>
 
   <body>
@@ -22,7 +22,7 @@
     <nav>
         <ul>
          <li><a class="nav-home" href="">Home</a></li> </div>
-            <li class="dropdown"><a href="">Read Manga <img src="images/triang_menu.png"/></a>
+            <li class="dropdown"><a href="">Read Manga <img src="/images/triang_menu.png"/></a>
               <ul> 
                   <li><a class="dropdownColor" href="#">Attack on Titan</a></li> 
                   <li><a class="dropdownColor" href="#">Berserk</a></li> 
@@ -153,6 +153,12 @@
           <p>
             Edit: To comment on this blog, click on the title.
           </p>
+
+          {{#publicacoes}}
+            <h2> {{titulo}}</h2>
+            <p>{{texto}}</p>
+          {{/publicacoes}}
+
           <div class="divider2"></div>
           <div class="botoes">
             <btn>

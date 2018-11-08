@@ -23,7 +23,16 @@ module.exports = class MongoDocument {
             return conn.db.collection(this.collection).insertOne(this);
         });
     }
-
+    savePubli () {
+        if (this.id) {
+            return conn.then((conn) => {
+                return conn.db.collection(this.collection).updateOne({id: this.id}, {$set: this});
+            });
+        }
+        return conn.then((conn) => {
+            return conn.db.collection(this.collection).insertOne(this);
+        });
+    }
     delete () {
         if (this._id) {
             return conn.then((conn) => {
@@ -32,6 +41,8 @@ module.exports = class MongoDocument {
         }
         return null;
     }
+
+    
 
     static findOne (Email, collection) {
         console.log("to no findOne");
