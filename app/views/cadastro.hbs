@@ -1,34 +1,75 @@
 
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta http-equiv="content-type"
-        content="text/html"; charset="utf-8">
-
-    </head>
-    <body>
-     
             <form action="./novoUsuario" method="get" accept-charset="utf-8">
                 
                     <label for="nome">Nome:</label>
                 
-                <input type="text" name="nome" id="nome" valeu=""/>
+                <input type="text" name="nome" id="nome" valeu="" required/>
 
                 <label for="nome">E-mail:</label>
                 
-                <input type="email" name="email" id="email" valeu=""/>
+                <input type="email" name="email" id="email" valeu="" required/>
                 
                     <label for="text">Senha:</label>
                 
-                <input type="password" name="senha" id="senha" valeu=""/>
+                <input type="password" name="senha" id="senha" valeu="" required/>
                    
+                <span class="message"></span>                   
                 
                 <input id="btnEnviar"  type="submit" value="Adicionar">
 
             </form>
-        
-    </body>
-</html>
+            <a href="/">Home</a>
+
+            <script type="text/javascript" charset="utf-8">
 
 
+                 console.log("to no script");
 
+                let input = document.querySelector("input[type=text]"),
+                message = document.querySelector(".message");
+                document.querySelector("input[type=submit]").addEventListener("click", function () {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", "index.hbs", true);
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                            message.innerHTML = 'Sucesso...';
+                            message.style.color = "green";
+                        }
+                    };
+                    xmlhttp.send("nome=" + input.value);
+                });
+                var container = document.querySelector('#container');
+                setInterval(function () {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", "index", true);
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
+                            container.innerHTML = xmlhttp.responseText;}
+                    };
+                    xmlhttp.send();
+                }, 5000);
+
+
+               /* console.log("script");
+                carregaDocumento("templates/header.hbs", "#mainheader");
+                //carregaDocumento("rodape.html", "#mainfooter");
+
+                function carregaDocumento(arquivo, target)
+                {
+                    var el = document.querySelector(target);
+
+                    //Se o elemento não existir então não requisita
+                    if (!el) return;
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", arquivo, true);
+                    xhr.onreadystatechange = function(){
+                        if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300){
+                            el.innerHTML = xhr.responseText;
+                        }
+                    };
+
+                    xhr.send(null);
+                    
+                }
+            </script>

@@ -4,25 +4,42 @@ let express = require('express'),
     app = express(),
     Usuario = require('./app/controller/Usuario'),
     Publi = require('./app/controller/Publi'),
-    user = require('./app/Model/User');
+    user = require('./app/Model/User'),
     cookieParser = require('cookie-parser'),
-    db = require("./app/Model/MongoDocument");
-    
-    
-    
-    
-    app.set('views', path.join(__dirname, 'app/views'));
-    app.set('view engine', 'hbs');
-    app.use(cookieParser());
+    //$ = require('jQuery'),
+    db = require("./app/Model/MongoDocument"),
+    hbs = require('hbs');
 
+    var jsdom = require('jsdom');
+const { JSDOM } = jsdom;
+const { window } = new JSDOM();
+const { document } = (new JSDOM('')).window;
+global.document = document;
+
+global.$ = jQuery = require('jquery')(window);
+    
+    
+    hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
+    
+    
+    app.set('view engine', 'hbs');
+    app.set('views', path.join(__dirname, '/app/views'));
+    app.use(express.urlencoded({extended: false}));
+    app.use(cookieParser());
+    app.use(express.static(__dirname + '/app/public'));
+
+    
+
+    app.get('/cadastro', (req, res) =>{
+        console.log("Estou no Cadasro");   
+        //res.render('cadastro');
+    });
 
     app.get('/novoUsuario', (req, res) =>{
         let u = null;
         u = new Usuario(req, res);
-        console.log(u);
         u.create();
-        
-        res.end();
+
     });
 
     app.get('/novaPublicacao', (req, res) => { 
@@ -44,52 +61,69 @@ let express = require('express'),
         
         res.end();
     });
-    app.get('/login', (req, res) => { 
-        console.log("ola");   
+    app.get('/login', (req, res) => {   
         res.render('login');
     });
-    app.get('/logar', (req, res) =>{
-        var email = req.query.email;
-        var senha = req.query.senha;
-  var promise_user = db.findOne(email, "usuarios");
-    promise_user.then(function (user) {
-        console.log(user);
-        var Email = user.email;
-        var Senha = user.senha;
-        if(Email == email && Senha == senha){
-            res.cookie('login', Email);
-            console.log(req.cookies);
 
-        }else{
-            res.redirect('/login');
-            console.log("login errado");
-        };
-        if (req.cookies && req.cookies.login) {
-            res.render('index', {
-                user: req.cookies.email
-            });
-            return ;
-        } else {
-            res.redirect('/login');
-        }
+    app.post('/logar', (req, res) =>{
+        //console.log(req);
+        
+        var email = req.body.email;
+        console.log(email);
+        var senha = req.body.senha;
+        var promise_user = db.findOne(email, "usuarios");
+        promise_user.then(function (user) {
+            console.log(user);
+            var Email = user.email;
+            var Senha = user.senha;
+            if (Email == null){
+                res.render('/login');
+                res.send("Email não cadastrado.");
+            }
+
+            if(Email == email && Senha == senha){
+                res.cookie('login', Email);
+                res.cookie('nome', user.nome);
+                console.log("cookie");
+                console.log(req.cookies);
+                if (req.cookies && req.cookies.login) {
+                    console.log("login ok");
+                    res.render('index', {
+                        user: req.cookies.email
+                    });
+                  //  res.redirect('/');
+                    return ;
+                } else {
+                    res.redirect('/login');
+                }
+            }else{
+                res.redirect('/login');
+                console.log("login errado");
+            };
+            
+        });
+        promise_user.catch((error) => {
+            console.error("Failed to add new friend. Error: " + error);
+            return Promise.reject(error);
+        });
     });
-  });
 
-  app.get('/logout',function(req,res){
-    res.clearCookie('login'); 
-    res.redirect('/');
-});
+    app.get('/logout',function(req,res){
+        res.clearCookie('login'); 
+        res.clearCookie('nome'); 
+        res.redirect('/');
+    }); 
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
     // Fazendo uma consulta no banco de dados
     var query = { };
-    var mysort = { titulo: 1 };
+    var mysort = { };
     var cursor = db.find(query, mysort, 100, "publicacoes" );
-    cursor.then(function (publicacoes) {
-        console.log(cursor);
-        db.close();
-        res.render('index', {publicacoes: publicacoes});
-    });
+    cursor
+        .then(function (publicacoes) {
+            res.render('index', {publicacoes: publicacoes});
+        })
+       
     
 }); 
 

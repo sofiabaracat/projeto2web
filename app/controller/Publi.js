@@ -15,7 +15,8 @@ module.exports = class Publi {
         let self = this,
             p = new Publicacao({});
         p.titulo = this.req.query.titulo;
-        p.texto = this.req.query.texto;   
+        p.texto = this.req.query.texto;
+        p.usuario = this.req.cookies.nome;
         p.save();
         this.res.writeHead(302, { 'Location': '/' });
         this.res.end();

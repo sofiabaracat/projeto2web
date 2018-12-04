@@ -4,8 +4,88 @@
     <meta charset="utf-8">
 
     <title>mangastream</title>
+    <link href="/css/style.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
 
-    <link href="style/style.css" rel="stylesheet">
+        /*$(function() {
+          $('#btnCadastro').click(function() {
+           
+            $.ajax({
+              type: "GET",
+              url: "cadastro",
+              dataType: 'html',
+              success: function(result) {
+                if(result == 1){
+                  console.log("conected");
+                  location.href='cadastro';//Redirecs
+                }
+                else{
+                  console.log(result);
+                  document.getElementById("msg").innerHTML = "Deu ruim ein...Credenciais erradas";
+                }
+              }
+            });
+            return false;
+          });
+        });*/
+
+      $(document).ready(function(){
+        $(".buscarPagina").click(function(){
+            //Aqui estau retirando o conteudo da propriedade href “o link destino” e colocando em uma variavel
+            var link = $(this).attr('href');
+            console.log("ola");
+            $.ajax
+            ({
+                dataType: 'hbs',
+                url: link, //link da pagina que o ajax buscará
+                type: 'GET',
+                success: function(data)
+                {
+                  
+                    $("#content").html(data).fadeIn(340); //Inserindo o retorno da pagina ajax
+                },
+                error: function(data){
+                    $("#content").html("<center><p>ERRO ao carregar outra pagina</p></center>").fadeIn(300); //Em caso de erro ele exibe esta mensagem
+                }
+            }); 
+         
+        });
+    });
+
+
+
+     /* function loadCadastro() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("container").innerHTML =
+              this.responseText;
+            }
+          };
+          xhttp.open("GET", "cadastro.html", true);
+          xhttp.send();
+        }
+
+
+      window.onload = function(){
+        document.querySelector("#cadastroMenu").addEventListener("click", function () {
+                    var container = document.querySelector('#container');
+                
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("GET", "cadastro", true);
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
+                            container.innerHTML = xmlhttp.responseText;
+                            }else {
+                              console.log("erro");
+                            }
+                    };
+                    xmlhttp.send(null);
+                });
+      }*/
+
+    </script>
   </head>
 
   <body>
@@ -44,12 +124,14 @@
             <li><a href="">Color Pages</a></li>
           </ul>
           <ul class="menu2">
-            <li><img class="imdDonate" src="images/donate.png" height="14"/></li>
-            <li><a href="">Donate</a></li>
-            <li><a href="">Login</a></li>
-            <li><a href="">Register</a></li>
+            <li><a href="/novaPublicacao">Nova Publicação</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li><a onclick="return false" id="btnCadastro" href="cadastro.hbs" class="buscarPagina">Cadastro</a></li>
           </ul>
     </nav>
+
+    <div id="content">
 
     <div class="imagens">
       <div class="img">
@@ -64,109 +146,29 @@
 
     
     <div class="conteudo">
-    <div class="text">
-      <h1>
-          A New Blog Post
-          <small>
-            Posted Nov 1st, 2017 by
-            <strong>
-                Jinn
-            </strong>
-          </small>
-      </h1>
-
-        <p>
-          Wow, I can't believe it's been almost a year since the last blog post. Sorry about that folks. We still love ya all. 
-        </p>
-        <p>
-          The last year's just been pretty rough, schedule changes and personal matters have had their toll on us and the amount of energy and time we had left over for scanlators-to-fans communication was subsequently pretty limited. However, things are beginning to easen up again, so here we are, back.
-        </p>
-        
-        <p>
-          Didn't just come back, either. We've listened to all the great feedback you've been providing and worked on this elaborate project behind the scenes to hopefully start getting rid of all the bad ads, the unfortunate by-product of keeping us up and running.
-          Check<strong> <a href="">this page </a></strong>   for all the info on that.
-        </p>
-        <p>
-          Along with that stuff, we have also implemented our very own discussion software, coded from scratch by our awesome admin. So if you've been a frequent participant in discussions on our site, make sure to get an account or use the social sign in and you're good to go. Obviously, all this stuff is new, so if you come across any bugs, please just report them here and we'll take care of it asap.
-        </p>
-        <p>
-          What else is there? Oh right. A public service announcement: Nothing changes, you don't have to become a "supporter" to keep reading manga here, and that'll never change. So please don't stress. This is just for those who want to donate on a regular basis. 
-        </p>
-        <p>
-          If you do however generously decide to become a supporter, chances are we can get rid of ads completely in the future. We're also brain-storming a few additional perks. One of them, my favorite, is to put together a "translator magazine" of sorts, with articles and opinion pieces by our staff, elaborate translation notes, reviews, that sort of thing, maybe even with some public participation and a Q&A corner - that sound like something you'd be interested in? I'll pay special attention to the posters saying "yes" who have a certain badge next to their names. ;)
-        </p>
-        <p>
-          Anyway, that's all we had to say for now. There was a lot of new code added, so please bear with us if anything breaks, we'll try and take care of it asap. <3
-        </p>
-        <p>
-          Edit: To comment on this blog, click on the title.
-        </p>
-        <div class="divider2"></div>
-        <h1>
-            Road to Fluency #1: Goals & Motivation
-            <small>
-                Posted Nov 13th, 2016 by 
-              <strong>
-                  beta
-              </strong>
-            </small>
-        </h1>
-  
-          <p>
-              Hey there, Anon here. In the comments many of you ask us how we learned Japanese. 
-              I decided to write a short blog series about how I, personally, learned the language since you all seem to be really interested in how the process can go - there's plenty of other paths than my own, naturally. Today we'll be covering reasons for learning the language and setting appropriate 
-              goals. 
-              This series will be written from the point of view of a self-learner. I will cover classroom learning in another post later in this series. 
-          </p>
-         
-          <h2>
-              Goals & Motivation
-          </h2>
-        
-          </p>
-          <p>
-              So you've decided to learn Japanese, great. Many of you are most likely not sure how to embark on this enormous task. One common mistake is not setting any short, mid, and long term goals. How motivated are you really, how much time are you willing to invest on a daily/weekly basis and what would you like to achieve? This could be reading manga, watching anime, reading novels, playing Karuta, communicating with your significant other or friends, traveling, acquiring linguistic knowledge, having fun, and the list goes on and on. There are two different kinds of motivation I will talk about: the intrinsically and the extrinsically driven.
-            </p>
-            <h2>
-                Intrinsic motivation
-            </h2>
-          <p>
-              This is the kind of motivation that comes from within. It is usually something you like doing. Some examples of this would be:
-          </p>
-            <ul class="texto">
-              <li>Playing any kinds of sports because you find it challenging </li>
-              <li>Playing any kinds of sports because you find it challenging </li>
-              <li>Playing any kinds of sports because you find it challenging </li>
-            </ul>
-          <p>
-            Along with that stuff, we have also implemented our very own discussion software, coded from scratch by our awesome admin. So if you've been a frequent participant in discussions on our site, make sure to get an account or use the social sign in and you're good to go. Obviously, all this stuff is new, so if you come across any bugs, please just report them here and we'll take care of it asap.
-          </p>
-          <p>
-            What else is there? Oh right. A public service announcement: Nothing changes, you don't have to become a "supporter" to keep reading manga here, and that'll never change. So please don't stress. This is just for those who want to donate on a regular basis. 
-          </p>
-          <p>
-            If you do however generously decide to become a supporter, chances are we can get rid of ads completely in the future. We're also brain-storming a few additional perks. One of them, my favorite, is to put together a "translator magazine" of sorts, with articles and opinion pieces by our staff, elaborate translation notes, reviews, that sort of thing, maybe even with some public participation and a Q&A corner - that sound like something you'd be interested in? I'll pay special attention to the posters saying "yes" who have a certain badge next to their names. ;)
-          </p>
-          <p>
-            Anyway, that's all we had to say for now. There was a lot of new code added, so please bear with us if anything breaks, we'll try and take care of it asap. <3
-          </p>
-          <p>
-            Edit: To comment on this blog, click on the title.
-          </p>
-
+      <div class="text">
           {{#publicacoes}}
-            <h2> {{titulo}}</h2>
+            {{!-- <h2> </h2> --}}
+            <h1>
+              {{titulo}}
+              <small>
+                {{dateFormat date "DD/MM/YYYY"}}
+                <strong>
+                  {{usuario}}
+                </strong>
+              </small>
+            </h1>
             <p>{{texto}}</p>
           {{/publicacoes}}
 
-          <div class="divider2"></div>
-          <div class="botoes">
-            <btn>
-              <a href="">← Newer</a>
-            </btn>
-            <btn>
-                <a href="">Older →</a>
-            </btn>
+        <div class="divider2"></div>
+        <div class="botoes">
+          <btn>
+            <a href="">← Newer</a>
+          </btn>
+          <btn>
+              <a href="">Older →</a>
+          </btn>
         </div>
       </div>
       <div class="container">
@@ -179,6 +181,7 @@
                 <li><span>X</span>Eaque placeat, maiores harum quaerat amet quae repudiandae assumenda quas?</li>
             </ul>
         </div>
+    </div>
     </div>
     
   </body>

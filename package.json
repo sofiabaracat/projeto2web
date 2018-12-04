@@ -13,7 +13,12 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
+    "handlebars-dateformat": "^1.1.1",
     "hbs": "^4.0.1",
-    "mongodb": "^3.1.8"
+    "jQuery": "^1.7.4",
+    "jquery": "^3.3.1",
+    "jsdom": "^13.0.0",
+    "mongodb": "^3.1.8",
+    "xmlhttprequest": "^1.8.0"
   }
 }

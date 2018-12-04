@@ -6,7 +6,8 @@ module.exports = class Publicacao extends MongoDocument {
         super(data);
         this.titulo = data.titulo;
         this.texto = data.texto;
-        this.date = data.date;
+        this.date = data.date || new Date();
+        this.usuario = data.usuario;
         this._id = data._id;
         this.collection = 'publicacoes';
     }

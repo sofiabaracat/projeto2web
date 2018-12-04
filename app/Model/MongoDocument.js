@@ -2,6 +2,8 @@ let client = require('mongodb').MongoClient,
     ObjectId = require('mongodb').ObjectId;
 let config = require('./config');
 let conn = client.connect(config.uri, config.options).then((conn) => {
+    // if (conn) return console.log(conn);
+
     return {
         db: conn.db(config.db),
         close: function () {
