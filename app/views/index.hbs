@@ -5,6 +5,7 @@
 
     <title>mangastream</title>
     <link href="/css/style.css" rel="stylesheet">
+    
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
 
@@ -37,13 +38,12 @@
             console.log("ola");
             $.ajax
             ({
-                dataType: 'hbs',
+                dataType: 'html',
                 url: link, //link da pagina que o ajax buscará
                 type: 'GET',
                 success: function(data)
                 {
-                  
-                    $("#content").html(data).fadeIn(340); //Inserindo o retorno da pagina ajax
+                  $("#content").html(data).fadeIn(340); //Inserindo o retorno da pagina ajax
                 },
                 error: function(data){
                     $("#content").html("<center><p>ERRO ao carregar outra pagina</p></center>").fadeIn(300); //Em caso de erro ele exibe esta mensagem
@@ -124,10 +124,10 @@
             <li><a href="">Color Pages</a></li>
           </ul>
           <ul class="menu2">
-            <li><a href="/novaPublicacao">Nova Publicação</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/logout">Logout</a></li>
-            <li><a onclick="return false" id="btnCadastro" href="cadastro.hbs" class="buscarPagina">Cadastro</a></li>
+            <li><a href="/novaPublicacao" onclick="return false" class="buscarPagina">Nova Publicação</a></li>
+            <li><a href="/login" onclick="return false" class="buscarPagina">Login</a></li>
+            <li><a href="/logout" >Logout</a></li>
+            <li><a onclick="return false" id="btnCadastro" href="/cadastro" class="buscarPagina">Cadastro</a></li>
           </ul>
     </nav>
 

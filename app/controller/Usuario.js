@@ -14,9 +14,9 @@ module.exports = class Usuario {
     create () {
         let self = this,
             u = new User({});
-        u.nome = this.req.query.nome;
-        u.email = this.req.query.email;
-        u.senha = this.req.query.senha;    
+        u.nome = this.req.body.nome;
+        u.email = this.req.body.email;
+        u.senha = this.req.body.senha;    
         u.save();
         this.res.writeHead(302, { 'Location': '/' });
         this.res.end();

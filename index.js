@@ -6,17 +6,18 @@ let express = require('express'),
     Publi = require('./app/controller/Publi'),
     user = require('./app/Model/User'),
     cookieParser = require('cookie-parser'),
-    //$ = require('jQuery'),
     db = require("./app/Model/MongoDocument"),
     hbs = require('hbs');
 
-    var jsdom = require('jsdom');
-const { JSDOM } = jsdom;
-const { window } = new JSDOM();
-const { document } = (new JSDOM('')).window;
-global.document = document;
+    var myParser = require("body-parser");
 
-global.$ = jQuery = require('jquery')(window);
+    var jsdom = require('jsdom');
+    const { JSDOM } = jsdom;
+    const { window } = new JSDOM();
+    const { document } = (new JSDOM('')).window;
+    global.document = document;
+
+    global.$ = jQuery = require('jquery')(window);
     
     
     hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
@@ -28,28 +29,40 @@ global.$ = jQuery = require('jquery')(window);
     app.use(cookieParser());
     app.use(express.static(__dirname + '/app/public'));
 
-    
+    app.use(myParser.json());
 
     app.get('/cadastro', (req, res) =>{
         console.log("Estou no Cadasro");   
-        //res.render('cadastro');
+       // res.render('cadastro');
+        res.sendFile(__dirname + '/app/views/cadastro.html');
     });
 
-    app.get('/novoUsuario', (req, res) =>{
+    app.post('/novoUsuario', (req, res) =>{
         let u = null;
         u = new Usuario(req, res);
+
+        u.nome = req.body.nome;
+        u.email = req.body.email;
+        u.senha = req.body.senha;
+
         u.create();
+       // res.redirect('index');
+        fs.writeFile("tasks.json", "JSON", req.body);
+        console.log(req.body);
+
+        res.header('Content-Type', 'application/json');
+        res.send(req.body);
 
     });
 
     app.get('/novaPublicacao', (req, res) => { 
         if (req.cookies && req.cookies.login) {
-            res.render('novaPublicacao', {
+            res.sendFile(__dirname + '/app/views/novaPublicacao.html', {
                 user: req.cookies.email
             });
             return ;
         } else {
-            res.redirect('/login');
+            res.sendFile(__dirname + '/app/views/login.html');
         }   
     });
 
@@ -62,7 +75,7 @@ global.$ = jQuery = require('jquery')(window);
         res.end();
     });
     app.get('/login', (req, res) => {   
-        res.render('login');
+        res.sendFile(__dirname + '/app/views/login.html');
     });
 
     app.post('/logar', (req, res) =>{
@@ -77,7 +90,7 @@ global.$ = jQuery = require('jquery')(window);
             var Email = user.email;
             var Senha = user.senha;
             if (Email == null){
-                res.render('/login');
+                res.sendFile(__dirname + '/app/views/login.html');
                 res.send("Email não cadastrado.");
             }
 
@@ -94,10 +107,10 @@ global.$ = jQuery = require('jquery')(window);
                   //  res.redirect('/');
                     return ;
                 } else {
-                    res.redirect('/login');
+                    res.sendFile(__dirname + '/app/views/login.html');
                 }
             }else{
-                res.redirect('/login');
+                res.sendFile(__dirname + '/app/views/login.html');
                 console.log("login errado");
             };
             
