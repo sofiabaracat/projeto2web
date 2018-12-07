@@ -30,6 +30,10 @@ let express = require('express'),
     app.use(express.static(__dirname + '/app/public'));
 
     app.use(myParser.json());
+    
+    app.get('/app/public/script/script.js',function(req,res){
+        res.sendFile(path.join(__dirname + '/app/public/script/script.js')); 
+    });
 
     app.get('/cadastro', (req, res) =>{
         console.log("Estou no Cadasro");   
@@ -38,7 +42,20 @@ let express = require('express'),
     });
 
     app.post('/novoUsuario', (req, res) =>{
+
+        var request = require('request');
+
+request.post(
+    'http://localhots:800/cadastro.html',
+    { json: { key: 'value' } },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body)
+        }
+    });
+    
         let u = null;
+
         u = new Usuario(req, res);
 
         u.nome = req.body.nome;
@@ -47,10 +64,11 @@ let express = require('express'),
 
         u.create();
        // res.redirect('index');
-        fs.writeFile("tasks.json", "JSON", req.body);
+      //  fs.writeFile("tasks.json", "JSON", req.body);
         console.log(req.body);
 
-        res.header('Content-Type', 'application/json');
+        res.header("Access-Control-Request-Method: POST");
+       // res.header('Content-Type', 'application/json');
         res.send(req.body);
 
     });

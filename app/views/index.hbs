@@ -5,37 +5,16 @@
 
     <title>mangastream</title>
     <link href="/css/style.css" rel="stylesheet">
-    
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/app/public/script/script.js"></script>
     <script type="text/javascript">
 
-        /*$(function() {
-          $('#btnCadastro').click(function() {
-           
-            $.ajax({
-              type: "GET",
-              url: "cadastro",
-              dataType: 'html',
-              success: function(result) {
-                if(result == 1){
-                  console.log("conected");
-                  location.href='cadastro';//Redirecs
-                }
-                else{
-                  console.log(result);
-                  document.getElementById("msg").innerHTML = "Deu ruim ein...Credenciais erradas";
-                }
-              }
-            });
-            return false;
-          });
-        });*/
 
       $(document).ready(function(){
         $(".buscarPagina").click(function(){
             //Aqui estau retirando o conteudo da propriedade href “o link destino” e colocando em uma variavel
             var link = $(this).attr('href');
-            console.log("ola");
             $.ajax
             ({
                 dataType: 'html',
@@ -53,37 +32,6 @@
         });
     });
 
-
-
-     /* function loadCadastro() {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("container").innerHTML =
-              this.responseText;
-            }
-          };
-          xhttp.open("GET", "cadastro.html", true);
-          xhttp.send();
-        }
-
-
-      window.onload = function(){
-        document.querySelector("#cadastroMenu").addEventListener("click", function () {
-                    var container = document.querySelector('#container');
-                
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open("GET", "cadastro", true);
-                    xmlhttp.onreadystatechange = function () {
-                        if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
-                            container.innerHTML = xmlhttp.responseText;
-                            }else {
-                              console.log("erro");
-                            }
-                    };
-                    xmlhttp.send(null);
-                });
-      }*/
 
     </script>
   </head>
